@@ -1,0 +1,22 @@
+
+# Build products
+target/
+
+# IntelliJ data
+*.iml
+.idea/
+.ipr
+
+# Documentation build output
+/docs/_build
+
+.DS_Store
+
+# Eclipse Core
+.project
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# Eclipse Setting
+.settings

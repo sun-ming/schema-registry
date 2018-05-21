@@ -1,0 +1,140 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.confluent</groupId>
+    <artifactId>kafka-schema-registry-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>2.0.1</version>
+    <name>kafka-schema-registry-parent</name>
+    <organization>
+        <name>Confluent, Inc.</name>
+        <url>http://confluent.io</url>
+    </organization>
+    <url>http://confluent.io</url>
+    <description>
+        Schema Registry provides a RESTful interface for storing and retrieving versioned Avro
+        schemas for use with Kafka.
+    </description>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git://github.com/confluentinc/schema-registry.git</connection>
+        <developerConnection>scm:git:git@github.com:confluentinc/schema-registry.git</developerConnection>
+        <url>https://github.com/confluentinc/schema-registry</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <modules>
+        <module>core</module>
+        <module>client</module>
+        <module>avro-serializer</module>
+        <module>json-serializer</module>
+        <module>avro-converter</module>
+        <module>package-schema-registry</module>
+        <module>package-kafka-serde-tools</module>
+    </modules>
+
+    <properties>
+        <jersey.version>2.19</jersey.version>
+        <confluent-common.version>2.0.1</confluent-common.version>
+        <kafka.version>0.9.0.1-cp1</kafka.version>
+        <kafka.scala.version>2.11</kafka.scala.version>
+        <log4j.version>1.7.6</log4j.version>
+        <restutils.version>2.0.1</restutils.version>
+        <avro.version>1.7.7</avro.version>
+        <jackson.version>2.5.4</jackson.version>
+        <junit.version>4.12</junit.version>
+        <easymock.version>3.3.1</easymock.version>
+        <powermock.version>1.6.2</powermock.version>
+        <powermock.api.easymock.version>1.6.2</powermock.api.easymock.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven-assembly.version>2.6</maven-assembly.version>
+        <confluent.maven.repo>http://packages.confluent.io/maven/</confluent.maven.repo>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <name>Confluent</name>
+            <url>${confluent.maven.repo}</url>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.glassfish.jersey</groupId>
+                <artifactId>jersey-bom</artifactId>
+                <version>${jersey.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+              <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-assembly-plugin</artifactId>
+                  <version>${maven-assembly.version}</version>
+              </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <argLine>-Djava.awt.headless=true</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                          </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
